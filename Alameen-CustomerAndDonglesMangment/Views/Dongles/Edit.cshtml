@@ -1,0 +1,135 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.Dongles
+
+@{
+    ViewData["Title"] = "تعديل الدنقل";
+}
+
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / تعديل الدنقل</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form asp-action="Edit" style="display:contents">
+        <input type="hidden" asp-for="Id" />
+        <div class="col-md-7 d-grid" style="display: grid;">
+
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>الرقم التسلسلي</Label>
+                    <input asp-for="SerialNum" class="form form-control" />
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نوع الدنقل</Label>
+                    <select asp-for="DongleTypeId" class="form-control" asp-items="ViewBag.DongleTypeId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>اللون</Label>
+                    <select asp-for="DongleColorId" class="form form-control" asp-items="ViewBag.DongleColorId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نسخة الامين</Label>
+                    <select asp-for="AmeenVerId" class="form form-control" asp-items="ViewBag.AmeenVerId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>رقم النسخة</Label>
+                    <input asp-for="VerNum" class="form form-control" />
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نوع اضافات الامين</Label>
+                    <select asp-for="AmeenAddOnTypesId" class="form form-control" asp-items="ViewBag.AmeenAddOnTypesId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+
+                <div class="margin_bottom_30">
+                    <Label>رئيسي او فرعي</Label>
+                    <select asp-for="MainOrSub" id="" class="form form-control">
+                        <option value="">اختر</option>
+                        <option value="1">رئيسي</option>
+                        <option value="2">فرعي</option>
+
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>تاريخ الانتهاء</Label>
+                    <input asp-for="ExpirationDate" type="date" class="form form-control" />
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-5">
+
+
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>العميل</Label>
+                    <select id="Getsub" asp-for="CustomerId" class="selectpicker form form-control" data-live-search="true" asp-items="ViewBag.CustomerId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>النائب</Label>
+                    <select id="select1" asp-for="RepresentativesId" class="selectpicker form form-control" data-live-search="true">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="white_shd  full margin_bottom_30">
+                <div class="pub">
+                    <input id="save" type="submit" class="btn btn-success form-control" value="حقظ التعديل">
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('#Getsub').on("change", function () {
+            var selc = document.getElementById("Getsub").value;
+            $('#select1').find('option:not(:first)').remove();
+            console.log(5);
+            $.ajax({
+                type: "GET",
+                url: "/Dongles/getVicar/" + selc,
+                dataType: 'text',
+                contentType: "application/json",
+                success: function (data) {
+                    results = JSON.parse(data);
+                    if (results.length > 0) {
+                        for (i in results) {
+                            $('#select1').append(new Option(results[i].name, results[i].id));
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+}

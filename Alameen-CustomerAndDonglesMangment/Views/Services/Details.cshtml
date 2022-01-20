@@ -1,0 +1,108 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.Tasks
+
+@{
+    ViewData["Title"] = "تفاصيل البلاغ";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / تفاصيل البلاغ</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12 d-grid" style="display: grid;">
+        <div class="white_shd add_pro full margin_bottom_30 row" style="padding: 20px;">
+
+            <div class="col-md-4">
+                <Label>المبلغ</Label>
+                <p class="text-bold">@Model.NameOfCustomer</p>
+            </div>
+
+            <div class="col-md-4">
+                <Label>اسم المحل</Label>
+                <p class="text-bold">@Model.Customer?.CommercialName</p>
+            </div>
+
+            <div class="col-md-4">
+                <Label>العنوان</Label>
+                <p class="text-bold">@Model.Customer?.State?.Name - @Model.Customer?.City?.Name - @Model.Customer?.Address </p>
+            </div>
+
+            <div class="col-md-4">
+                <Label>نوع الصيانة</Label>
+                <p class="text-bold">@Model.MaintenanceType?.Name </p>
+            </div>
+
+            <div class="col-md-4">
+                <Label>المختص</Label>
+                <p class="text-bold">@Model?.User?.FullName</p>
+            </div>
+
+
+            <div class="col-md-4">
+                <Label>الحاله</Label>
+                @switch (Model.State)
+                {
+                    case State.Complete:
+                        <p class="alert alert-success">مكتمل</p>
+                        break;
+                    case State.PartiallyComplete:
+                        <p class="alert alert-warning">مكتمل جزئي</p>
+                        break;
+                    case State.UnComplete:
+                        <p class="alert alert-dark">غير مكتمل</p>
+                        break;
+                    case State.Block:
+                        <p class="alert alert-danger">محطور</p>
+                        break;
+                }
+            </div>
+
+
+            <div class="col-md-4">
+                <Label>القيمة</Label>
+                <p class="text-bold">@Model?.Cost</p>
+            </div>
+
+            <div class="col-md-4">
+                <Label>الدفع</Label>
+                @{
+                    switch (Model.IsPaid)
+                    {
+                        case true:
+                            <p class="text-bold">مسدد</p>
+                            break;
+                        case false:
+                            <p class="text-bold">غير مسدد</p>
+                            break;
+                    }
+                }
+            </div>
+
+
+            <div class="col-md-4">
+                <Label>المشكلة</Label>
+                <p class="text-bold">@Model?.Problem</p>
+            </div>
+
+            <div class="col-md-12">
+                <Label>ملاحظات</Label>
+                <p class="text-bold">@Model?.Note</p>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<div>
+    <a asp-action="Index">العودة للقائمة</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">تعديل</a>
+</div>

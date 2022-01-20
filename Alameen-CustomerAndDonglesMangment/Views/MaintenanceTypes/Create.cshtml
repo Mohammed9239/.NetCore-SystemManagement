@@ -1,0 +1,37 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.MaintenanceType
+
+@{
+    ViewData["Title"] = "اضافة نوع للصيانة";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / اضافة نوع للصيانة</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form asp-action="Create" style="display:contents">
+
+        <div class="col-md-8 mx-auto d-grid" style="display: grid;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="white_shd add_pro margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+
+                    <Label>نوع الصيانة</Label>
+                    <input asp-for="Name" class="form form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+
+                    <input id="save" type="submit" class="btn btn-success form-control mt-2" value="اضافة">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+</div>

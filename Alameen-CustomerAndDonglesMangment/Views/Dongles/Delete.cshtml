@@ -1,0 +1,128 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.Dongles
+
+@{
+    ViewData["Title"] = "حذف الدنقل";
+}
+
+<style>
+    .form-control:disabled, .form-control[readonly] {
+        background-color: #ffffff;
+        opacity: 1;
+    }
+</style>
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / حذف الدنقل</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form asp-action="Edit" style="display:contents">
+        <input type="hidden" asp-for="Id" />
+        <div class="col-md-7 d-grid" style="display: grid;">
+
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>الرقم التسلسلي</Label>
+                    <input asp-for="SerialNum" class="form form-control" readonly/>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نوع الدنقل</Label>
+                    <select class="form-control">
+                        <option value="">@Model.DongleType?.Name</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>اللون</Label>
+                    <select class="form form-control">
+                        <option value="">@Model.DongleColor?.Name</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نسخة الامين</Label>
+                    <select class="form form-control">
+                        <option value="">@Model.AmeenVer?.Name</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>رقم النسخة</Label>
+                    <input asp-for="VerNum" class="form form-control" readonly/>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نوع اضافات الامين</Label>
+                    <select class="form form-control">
+                        <option value="">@Model.AmeenAddOnTypes?.Name</option>
+                    </select>
+                </div>
+
+
+                <div class="margin_bottom_30">
+                    <Label>رئيسي او فرعي</Label>
+                    <select asp-for="MainOrSub" id="" class="form form-control">
+                        @{ 
+                            string m;
+                            switch (Model.MainOrSub)
+                            {
+                                case 1:
+                                    m = "رئيسي";
+                                    break;
+
+                                case 2:
+                                    m = "فرعي";
+                                    break;
+
+                                default:
+                                    m = "غير معرف";
+                                    break;
+                            }
+                        }
+                        <option value="">@m</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>تاريخ الانتهاء</Label>
+                    <input asp-for="ExpirationDate" type="date" class="form form-control" readonly/>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-5">
+
+
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>العميل</Label>
+                    <select id="Getsub" class="form form-control">
+                        <option value="">@Model.Customer?.Name</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>النائب</Label>
+                    <select id="select1" class="form form-control">
+                        <option value="">@Model.Representatives?.Name</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="white_shd  full margin_bottom_30">
+                <div class="pub">
+                    <input id="save" type="submit" class="btn btn-danger form-control" value="حذف">
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

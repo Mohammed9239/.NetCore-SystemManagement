@@ -1,0 +1,142 @@
+﻿@model IEnumerable<Alameen_CustomerAndDonglesMangment.Models.Dongles>
+
+@{
+    ViewData["Title"] = "الدناقل المنتهيه";
+    int Count = 0;
+}
+
+<style>
+    @@media print {
+        .no-print {
+            display: none;
+        }
+
+        body .printable {
+            display: inline-table;
+        }
+    }
+</style>
+
+<div class="row column_title no-print">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / الدناقل المنتهيه</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- table section -->
+    <div class="col-md-12">
+        <div class="white_shd full margin_bottom_30">
+            <div class="full inbox_inner_section">
+                <div class="mail-option no-print">
+                    <div class="btn-group">
+                        <a style="background-color: #1ed085;" asp-action="Index" class="btn text-white mini tooltips">
+                            فحص الدناقل
+                        </a>
+                    </div>
+                    <div class="btn-group float-left">
+                        <a style="background-color: #15283c;" id="print-button" class="btn text-white mini tooltips print-button">
+                            طباعة
+                        </a>
+                    </div>
+                </div>
+                <div class="row printable" id="print">
+                    <div class="col-md-12">
+                        <div class="full padding_infor_info">
+                            <div class="mail-box">
+                                <aside class="lg-side">
+                                    <div class="inbox-head">
+                                        <h3>الدناقل المنتهيه ( <span class="text-danger">@Model.ToList().Count</span> )</h3>
+                                        <form asp-action="Index" class="position search_inbox no-print" style="float: left;">
+                                            <div class="input-append">
+                                                <input type="text" name="Day" value="@ViewBag?.Day" class="sr-input" placeholder="بحث...">
+                                                <button class="btn sr-btn" type="submit"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="inbox-body">
+                                        <div class="table_section">
+                                            <div class="table-responsive-sm">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>الرقم التسلسلي</th>
+                                                            <th>نوع الدنقل</th>
+                                                            <th>اللون</th>
+                                                            <th>العميل</th>
+                                                            <th>المحافظة</th>
+                                                            <th>المدينة</th>
+                                                            <th>العنوان	</th>
+                                                            <th>تاريخ الانتهاء</th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr onclick="" style="cursor: pointer;">
+                                                                <td>@(++Count)</td>
+                                                                <td>
+                                                                    <a asp-controller="Dongles" asp-action="Details" asp-route-id="@item.Id">
+                                                                        @item.SerialNum
+                                                                    </a>
+                                                                </td>
+                                                                <td>@item.DongleType?.Name</td>
+                                                                <td>@item.DongleColor?.Name</td>
+                                                                <td>@item.Customer?.Name</td>
+                                                                <td>@item.Customer?.State?.Name</td>
+                                                                <td>@item.Customer?.City?.Name</td>
+                                                                <td>@item.Customer?.Address</td>
+                                                                <td>
+                                                                    @if (item.ExpirationDate.HasValue)
+                                                                    {
+                                                                        @item.ExpirationDate.Value.ToString("yyyy/MM/dd")
+
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    <div class="ed no-print">
+                                                                        <a class="btn" asp-controller="Dongles" asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل">
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </a>
+                                                                        <a class="btn" asp-controller="Dongles" asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="" data-original-title="حذف">
+                                                                            <i class="fa fa-trash-o"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                                <td></td>
+                                                            </tr>
+
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pagedlist" style="float: right;">
+                                    </div>
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- table section -->
+</div>
+
+@section Scripts{
+    <script>
+
+        $('.print-button').on('click', function () {
+            window.print();
+        });
+
+    </script>
+
+}

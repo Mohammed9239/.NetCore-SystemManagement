@@ -1,0 +1,134 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.Customers
+
+@{
+    ViewData["Title"] = "حذف العميل";
+}
+
+<style>
+    .form-control:disabled, .form-control[readonly] {
+        background-color: #ffffff;
+        opacity: 1;
+    }
+</style>
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / حذف العميل</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form asp-action="Delete" enctype="multipart/form-data" style="display:contents">
+        <input type="hidden" asp-for="Id" />
+        <div class="col-md-8 d-grid" style="display: grid;">
+
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>اسم العميل</Label>
+                    <input asp-for="Name" class="form form-control" readonly/>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>المحافظة</Label>
+                    <select asp-for="StateId" id="Getsub" class="form-control">
+                        <option value="">@Model.State?.Name</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>المدينة</Label>
+                    <select asp-for="CityId" id="select1" class="form form-control">
+                        <option value="">@Model.City?.Name</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>العنوان</Label>
+                    <input asp-for="Address" class="form form-control" readonly/>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>رقم الهاتف</Label>
+                    <input asp-for="Phone" class="form form-control" readonly/>
+                </div>
+            </div>
+
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>الاسم التجاري</Label>
+                    <input asp-for="CommercialName" class="form form-control" readonly/>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نوع النشاط</Label>
+                    <select asp-for="ActivityTypeId" class="form-control">
+                        <option value="">@Model.ActivityType?.Name</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نوع العقد</Label>
+                    <select asp-for="ContractTypeId" id="" class="form form-control">
+                        <option value="">@Model.ContractType?.Name</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>قيمة العقد</Label>
+                    <input asp-for="ContractPrice" class="form form-control" readonly/>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>تاريخ العقد</Label>
+                    <input asp-for="ContractDate" type="date" class="form form-control" readonly/>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>حاله العميل</Label>
+                    <select asp-for="CustomerStatusId" class="form form-control">
+                        <option value="">@Model.CustomerStatus?.Name</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="white_shd add_img full margin_bottom_30">
+                <label class="imgtitle"> شعار العميل</label>
+                <div class="favimg">
+                    <img src="~/Uploads/@Model?.Logo" id="profile-img-tag" class="img-responsive" />
+                </div>
+            </div>
+
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 13px;">
+                <div class="margin_bottom_30">
+                    <Label>نسخة الويندوز</Label>
+                    <select asp-for="WindowsVerId" class="form form-control">
+                        <option value="">@Model.WindowsVer?.Name</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نسخة الSQL  </Label>
+                    <select asp-for="SqlverId" class="form form-control">
+                        <option value="">@Model.Sqlver?.Name</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="white_shd  full margin_bottom_30">
+                <div class="pub">
+                    <input id="save" type="submit" class="btn btn-danger form-control" value="حذف العميل">
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

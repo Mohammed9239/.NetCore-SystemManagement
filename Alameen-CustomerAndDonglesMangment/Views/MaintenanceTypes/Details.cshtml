@@ -1,0 +1,34 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.MaintenanceType
+
+@{
+    ViewData["Title"] = "تفاصيل نوع الصيانة";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / تفاصيل نوع الصيانة</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12 d-grid" style="display: grid;">
+        <div class="white_shd add_pro full margin_bottom_30 row" style="padding: 20px;">
+
+            <div class="col-md-4">
+                <Label>نوع الصيانة</Label>
+                <p class="text-bold">@Model?.Name</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div>
+    <a asp-action="Index">العودة للقائمة</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">تعديل</a>
+</div>

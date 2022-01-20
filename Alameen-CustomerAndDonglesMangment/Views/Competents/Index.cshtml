@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Alameen_CustomerAndDonglesMangment.Models.User>
+
+@{
+    ViewData["Title"] = "المختصين";
+    int count = 0;
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / المختصين </h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- table section -->
+    <div class="col-md-12">
+        <div class="white_shd full margin_bottom_30">
+            <div class="full inbox_inner_section">
+                <div class="mail-option">
+                    <div class="btn-group">
+                        <a style="background-color: #1ed085;" asp-action="Create" class="btn text-white mini tooltips">
+                            اضافة مختص
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="full padding_infor_info">
+                            <div class="mail-box">
+                                <aside class="lg-side">
+                                    <div class="inbox-head">
+                                        <h3>المختصين (@Model.ToList().Count)</h3>
+                                        <form asp-action="Index" class="position search_inbox" style="float: left;">
+                                            <div class="input-append">
+                                                <input type="text" name="Word" value="@ViewBag?.Word" class="sr-input" placeholder="بحث..." />
+                                                <button class="btn sr-btn" type="submit"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="inbox-body">
+
+                                        <div class="table_section">
+                                            <div class="table-responsive-sm">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>الاسم</th>
+                                                            <th>الوظيفة</th>
+                                                            <th>الهاتف</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr onclick="" style="cursor: pointer;">
+                                                                <td>@(++count)</td>
+                                                                <td>
+                                                                    <a asp-action="Details" asp-route-id="@item.Id">
+                                                                        @item?.FullName
+                                                                    </a>
+                                                                </td>>
+                                                                <td>@item?.Jop</td>
+                                                                <td>@item?.PhoneNumber</td>
+                                                                <td>
+                                                                    <div class="ed">
+                                                                        <a class="btn" asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل">
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </a>
+                                                                        <a class="btn" asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="" data-original-title="حذف">
+                                                                            <i class="fa fa-trash-o"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pagedlist" style="float: right;">
+
+                                    </div>
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- table section -->
+</div>

@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>@ViewData["Title"]  - لوحة admn</title>
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <style>
+        .bootstrap-select > .dropdown-toggle.bs-placeholder {
+            display: block;
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-family: 'myfont';
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            height: 40px;
+        }
+
+        .bootstrap-select .dropdown-toggle .filter-option {
+            float: right;
+            right: 0;
+            text-align: right;
+        }
+
+        .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+            font-family: 'myfont'
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="dashboard dashboard_1" dir="rtl">
+    <div class="full_container">
+        <div class="inner_container">
+
+            <!-- Sidebar  -->
+
+            <nav id="sidebar">
+                <div class="sidebar_blog_1 ">
+                    <div class="sidebar_user_info">
+                        <div class="icon_setting"></div>
+                        <div class="user_profle_side">
+                            <div class="user_info">
+                                <h6>@User.Identity.Name</h6>
+                                <p id="online"> متصل <span class="online_animation"></span></p>
+                                <p id="off" style="color: #e91e63 ;"> لايوجد اتصال <span class="off_animation"></span></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar_blog_2">
+                    <h4>العام</h4>
+                    <ul class="list-unstyled components">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-dashboard yellow_color"></i> <span>الرئيسية</span></a></li>
+                        <li><a asp-area="" asp-controller="Customers" asp-action="Index"><i class="fa fa-users blue1_color"></i> <span> العملاء</span></a></li>
+                        <li>
+                            <a asp-area="" asp-controller="Dongles" asp-action="Index">
+                                <i class="fa fa-usb green_color"></i> <span>الدناقل</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="CheckDongles" asp-action="Index">
+                                <i class="fa fa-clone red_color"></i>
+                                <span>
+                                    فحص الدناقل
+                                    <span class="text-left badge rounded-pill bg-danger" style="font-size:14px">@ViewBag.dayend</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fa fa-paper-plane yellow_color"></i> <span>البلاغات</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- end sidebar -->
+            <!-- left content -->
+
+            <div id="content">
+
+                <!-- topbar -->
+                <div class="topbar">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div class="full">
+                            <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                            <div class="left_topbar">
+                                <div class="icon_info">
+                                    <ul class="user_profile_dd">
+                                        <li>
+                                            <a class="dropdown-toggle" data-toggle="dropdown"><span class="name_user">@User.Identity.Name</span></a>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">الملومات</a>
+                                                <a class="dropdown-item" onclick="document.getElementById('logout').click();"><span>تسجيل الخروج</span> <i class="fa fa-sign-out"></i></a>
+                                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
+                                                    <input type="submit" hidden id="logout" />
+                                                </form>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <!-- end topbar -->
+                <!-- dashboard inner -->
+                <div class="midde_cont text-right">
+                    <div class="container-fluid">
+
+                        @RenderBody()
+
+                    </div>
+
+                </div>
+                <!-- end dashboard inner -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/js/jquery-2.2.4.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+    <!-- custom js -->
+    <script src="~/js/custom.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
+

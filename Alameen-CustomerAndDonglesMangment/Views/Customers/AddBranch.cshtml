@@ -1,0 +1,91 @@
+﻿@model CustBrans
+@{
+    ViewData["Title"] = "اضافة فرع";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / اضافة فرع</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-8 d-grid mx-auto" style="display: grid;">
+        <form asp-action="AddBranch">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 20px;">
+
+                <div class="margin_bottom_30">
+                    <Label>العميل</Label>
+                    <select class="form-control">
+                        <option value="">@ViewBag.customer</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>اسم الفرع </Label>
+                    <input asp-for="Name" class="form form-control" />
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>المحافظة</Label>
+                    <select asp-for="StateId" id="Getsub" class="form-control" asp-items="ViewBag.StateId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>المدينة</Label>
+                    <select asp-for="CityId" id="select1" class="form form-control">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>رقم الهاتف</Label>
+                    <input asp-for="Phone" class="form form-control" />
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>العنوان</Label>
+                    <input asp-for="Address" class="form form-control" />
+                </div>
+
+                <input id="save" type="submit" class="btn btn-success form-control" value="اضافة الفرع">
+
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('#Getsub').on("change", function () {
+            var selc = document.getElementById("Getsub").value;
+            $('#select1').find('option:not(:first)').remove();
+            console.log(5);
+            $.ajax({
+                type: "GET",
+                url: "/Customers/getsub/" + selc,
+                dataType: 'text',
+                contentType: "application/json",
+                success: function (data) {
+                    results = JSON.parse(data);
+                    if (results.length > 0) {
+                        for (i in results) {
+                            $('#select1').append(new Option(results[i].name, results[i].id));
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+}

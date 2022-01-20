@@ -1,0 +1,31 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.States
+
+@{
+    ViewData["Title"] = "اضافة محافظة";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / اضافة محافظة</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 d-grid mx-auto" style="display: grid;">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 20px;">
+
+                <div class="margin_bottom_30">
+                    <Label>اسم المحافظة </Label>
+                    <input asp-for="Name" class="form form-control" />
+                </div>
+
+                <input id="save" type="submit" class="btn btn-success form-control" value="اضافة المحافظة">
+
+            </div>
+        </form>
+    </div>
+</div>

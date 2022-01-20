@@ -1,0 +1,31 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.MaintenanceType
+
+@{
+    ViewData["Title"] = "حذف نوع الصيانة";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / حذف نوع الصيانة </h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form asp-action="Delete" style="display:contents">
+        <input type="hidden" asp-for="Id" />
+        <div class="col-md-8 mx-auto d-grid" style="display: grid;">
+
+            <div class="white_shd add_pro margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>نوع الصيانة</Label>
+                    <input asp-for="Name" class="form form-control" readonly/>
+
+                    <input id="save" type="submit" class="btn btn-danger form-control mt-2" value="حذف">
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

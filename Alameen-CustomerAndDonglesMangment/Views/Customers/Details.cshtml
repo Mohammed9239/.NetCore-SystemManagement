@@ -1,0 +1,329 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.Customers
+
+@{
+    ViewData["Title"] = " تفاصيل العميل";
+    int CountDongles = 0;
+    int CountBranch = 0;
+    int CountVicar = 0;
+}
+
+<style>
+    @@media print {
+        .no-print{
+            display:none;
+        }
+
+        body .printable {
+            display: inline-table;
+        }
+    }
+</style>
+
+
+<div class="row column_title no-print">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / تفاصيل العميل</h2>
+        </div>
+    </div>
+</div>
+
+<div class="inbox-body no-print">
+    <div class="mail-option">
+        <div class="btn-group">
+            <a style="background-color: #1ed085;" asp-action="AddDongle" asp-route-id="@Model.Id" class="btn text-white mini tooltips">
+                اضافة دنقل
+            </a>
+        </div>
+        <div class="btn-group">
+            <a style="border:1px solid #1ed085; color: #1ed085;" asp-action="AddBranch" asp-route-id="@Model.Id" class="btn mini tooltips">
+                اضافة فرع
+            </a>
+        </div>
+        <div class="btn-group">
+            <a style="border:1px solid #1ed085; color: #1ed085;" asp-action="AddVicar" asp-route-id="@Model.Id" class="btn mini tooltips">
+                اضافة نائب
+            </a>
+        </div>
+        <div class="btn-group float-left">
+            <a style="background-color: #15283c;" id="print-button" class="btn text-white mini tooltips print-button">
+                 طباعة
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="print" class="printable" style="display:inline-grid">
+
+    @*Details*@
+    <div class="row">
+
+        <div class="col-md-8 d-grid" style="display: grid;">
+            <div class="white_shd add_pro full margin_bottom_30 row" style="padding: 20px;">
+
+                <div class="col-md-4">
+                    <Label>اسم العميل</Label>
+                    <p class="text-bold">@Model?.Name</p>
+                </div>
+
+                <div class="col-md-4">
+                    <Label>المحافظة</Label>
+                    <p class="text-bold">@Model.State?.Name</p>
+                </div>
+
+                <div class="col-md-4">
+                    <Label>المدينة</Label>
+                    <p class="text-bold">@Model.City?.Name</p>
+                </div>
+
+                <div class="col-md-4">
+                    <Label>العنوان</Label>
+                    <p class="text-bold">@Model?.Address</p>
+                </div>
+
+                <div class="col-md-4">
+                    <Label>رقم الهاتف</Label>
+                    <p class="text-bold">@Model?.Phone</p>
+                </div>
+
+                <div class="col-md-4">
+                    <Label>الاسم التجاري</Label>
+                    <p class="text-bold">@Model?.CommercialName</p>
+                </div>
+
+                <div class="col-md-4">
+                    <Label>نوع النشاط</Label>
+                    <p class="text-bold">@Model.ActivityType.Name</p>
+                </div>
+
+                <div class="col-md-4">
+                    <Label>نوع العقد</Label>
+                    <p class="text-bold">@Model.ContractType?.Name</p>
+                </div>
+
+                <div class="col-md-4">
+                    <Label>حالة العميل</Label>
+                    <p class="text-bold">@Model.CustomerStatus?.Name</p>
+                </div>
+
+                <div class="col-md-12">
+                    <Label>ملاحظات</Label>
+                    <p class="text-bold">@Model?.Note</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="white_shd add_img full margin_bottom_30">
+                <label class="imgtitle"> شعار العميل</label>
+                <div class="favimg">
+                    <img src="~/Uploads/@Model?.Logo" id="profile-img-tag" class="img-responsive" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @*Dongles*@
+    <div class="row margin_bottom_30">
+
+        <div class="col-md-12">
+            <div class="white_shd add_pro full margin_bottom_30" style="margin: -7px;">
+                <div class="dash_blog">
+                    <div class="dash_blog_inner">
+                        <div class="dash_head">
+                            <h3>
+                                <span><i class="fa fa-usb"></i> الدناقل الخاصة بالعميل</span>
+                            </h3>
+                        </div>
+
+                        <div class="table_section">
+                            <div class="table-responsive-sm">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>الرقم التسلسلي</th>
+                                            <th>نوع الدنقل</th>
+                                            <th>اللون</th>
+                                            <th>تاريخ الانتهاء</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Dongles)
+                                        {
+                                            <tr onclick="" style="cursor: pointer;">
+                                                <td>@(++CountDongles)</td>
+                                                <td>
+                                                    <a asp-controller="Dongles" asp-action="Details" asp-route-id="@item.Id">
+                                                        @item.SerialNum
+                                                    </a>
+                                                </td>
+                                                <td>@item.DongleType?.Name</td>
+                                                <td>@item.DongleColor?.Name</td>
+                                                <td>@item.ExpirationDate</td>
+                                                <td>
+                                                    <div class="ed">
+                                                        <a class="btn" asp-controller="Dongles" asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @*Branch*@
+    <div class="row margin_bottom_30">
+
+        <div class="col-md-12">
+            <div class="white_shd add_pro full margin_bottom_30" style="margin: -7px;">
+                <div class="dash_blog">
+                    <div class="dash_blog_inner">
+                        <div class="dash_head">
+                            <h3>
+                                <span><i class="fa fa-arrows"></i> الفروع </span>
+                            </h3>
+                        </div>
+
+                        <div class="table_section">
+                            <div class="table-responsive-sm">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>اسم الفرع</th>
+                                            <th>المحافظة</th>
+                                            <th>المدينة</th>
+                                            <th>العنوان</th>
+                                            <th>رقم الهاتف</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.CustBrans)
+                                        {
+                                            <tr onclick="" style="cursor: pointer;">
+                                                <td>@(++CountBranch)</td>
+                                                <td>
+                                                    <a asp-action="" asp-route-id="@item.Id">
+                                                        @item.Name
+                                                    </a>
+                                                </td>
+                                                <td>@item.State?.Name</td>
+                                                <td>@item.City?.Name</td>
+                                                <td>@item.Address</td>
+                                                <td>@item?.Phone</td>
+                                                <td>
+                                                    <div class="ed">
+                                                        <a class="btn" asp-action="EditBranch" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @*vicar*@
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="white_shd add_pro full margin_bottom_30" style="margin: -7px;">
+                <div class="dash_blog">
+                    <div class="dash_blog_inner">
+                        <div class="dash_head">
+                            <h3>
+                                <span><i class="fa fa-users"></i> النوئب </span>
+                            </h3>
+                        </div>
+
+                        <div class="table_section">
+                            <div class="table-responsive-sm">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>اسم النائب</th>
+                                            <th>المحافظة</th>
+                                            <th>المدينة</th>
+                                            <th>العنوان</th>
+                                            <th>رقم الهاتف</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Representatives)
+                                        {
+                                            <tr onclick="" style="cursor: pointer;">
+                                                <td>@(++CountVicar)</td>
+                                                <td>
+                                                    <a asp-action="DetailsVicar" asp-route-id="@item.Id">
+                                                        @item.Name
+                                                    </a>
+                                                </td>
+                                                <td>@item.State?.Name</td>
+                                                <td>@item.City?.Name</td>
+                                                <td>@item?.Address</td>
+                                                <td>@item?.Phone</td>
+                                                <td>
+                                                    <div class="ed">
+                                                        <a class="btn" asp-action="EditVicar" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+@section Scripts{ 
+<script>
+
+    $('.print-button').on('click', function () {
+        window.print();
+    });
+
+</script>
+
+}

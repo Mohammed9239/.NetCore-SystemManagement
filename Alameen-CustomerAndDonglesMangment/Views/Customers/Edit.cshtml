@@ -1,0 +1,156 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.Customers
+
+@{
+    ViewData["Title"] = "تعديل العميل";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / تعديل العميل</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form asp-action="Edit" enctype="multipart/form-data" style="display:contents">
+        <input type="hidden" asp-for="Id" />
+        <div class="col-md-8 d-grid" style="display: grid;">
+
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>اسم العميل</Label>
+                    <input asp-for="Name" class="form form-control" />
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>المحافظة</Label>
+                    <select asp-for="StateId" id="Getsub" class="form-control" asp-items="ViewBag.StateId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>المدينة</Label>
+                    <select asp-for="CityId" id="select1" class="form form-control">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>العنوان</Label>
+                    <input asp-for="Address" class="form form-control" />
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>رقم الهاتف</Label>
+                    <input asp-for="Phone" class="form form-control" />
+                </div>
+            </div>
+
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>الاسم التجاري</Label>
+                    <input asp-for="CommercialName" class="form form-control" />
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نوع النشاط</Label>
+                    <select asp-for="ActivityTypeId" class="form-control" asp-items="ViewBag.ActivityTypeId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نوع العقد</Label>
+                    <select asp-for="ContractTypeId" id="" class="form form-control" asp-items="ViewBag.ContractTypeId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>قيمة العقد</Label>
+                    <input asp-for="ContractPrice" class="form form-control" />
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>تاريخ العقد</Label>
+                    <input asp-for="ContractDate" type="date" class="form form-control" />
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>حاله العميل</Label>
+                    <select asp-for="CustomerStatusId" class="form form-control" asp-items="ViewBag.CustomerStatusId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="white_shd add_img full margin_bottom_30">
+                <label class="imgtitle">تعديل شعار العميل</label>
+                <div class="favimg">
+                    <i class="fa fa-picture-o" id="pic"></i>
+                    <img src="" id="profile-img-tag" class="img-responsive" />
+                    <label id="err" style="display: none;">اختر امتداد صحيح</label>
+                </div>
+                <input type="file" name="logo" id="profile-img" class="form form-control">
+            </div>
+
+            <div class="white_shd add_pro full margin_bottom_30" style="padding: 13px;">
+                <div class="margin_bottom_30">
+                    <Label>نسخة الويندوز</Label>
+                    <select asp-for="WindowsVerId" class="form form-control" asp-items="ViewBag.WindowsVerId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+
+                <div class="margin_bottom_30">
+                    <Label>نسخة الSQL  </Label>
+                    <select asp-for="SqlverId" class="form form-control" asp-items="ViewBag.SqlverId">
+                        <option value="">اختر</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="white_shd  full margin_bottom_30">
+                <div class="pub">
+                    <input id="save" type="submit" class="btn btn-success form-control" value="حفظ التعديل">
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('#Getsub').on("change", function () {
+            var selc = document.getElementById("Getsub").value;
+            $('#select1').find('option:not(:first)').remove();
+            console.log(5);
+            $.ajax({
+                type: "GET",
+                url: "/Customers/getsub/" + selc,
+                dataType: 'text',
+                contentType: "application/json",
+                success: function (data) {
+                    results = JSON.parse(data);
+                    if (results.length > 0) {
+                        for (i in results) {
+                            $('#select1').append(new Option(results[i].name, results[i].id));
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+}

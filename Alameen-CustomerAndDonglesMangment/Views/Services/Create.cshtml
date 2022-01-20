@@ -1,0 +1,82 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.Tasks
+
+@{
+    ViewData["Title"] = "اضافة بلاغ";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / اضافة بلاغ</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form asp-action="Create" style="display:contents">
+
+        <div class="col-md-8 mx-auto d-grid" style="display: grid;">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="white_shd add_pro margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>اسم المبلغ</Label>
+                    <input asp-for="NameOfCustomer" class="form form-control" />
+
+                    <Label>العميل</Label>
+                    <select asp-for="CustomerId" id="Getsub" class="selectpicker form-control" data-live-search="true" asp-items="ViewBag.CustomerId">
+                        <option value="">اختر</option>
+                    </select>
+
+                    <Label>المشكلة</Label>
+                    <textarea asp-for="Problem" class="form-control"></textarea>
+
+                    <Label>نوع الصيانة</Label>
+                    <select asp-for="MaintenanceTypeId" id="Getsub" class="selectpicker form-control" data-live-search="true" asp-items="ViewBag.MaintenanceTypeId">
+                        <option value="">اختر</option>
+                    </select>
+
+                    <Label>المختص</Label>
+                    <select asp-for="UserId" id="Getsub" class="selectpicker form-control" data-live-search="true" asp-items="ViewBag.CompetentId">
+                        <option value="">اختر</option>
+                    </select>
+
+                    <Label>الحاله</Label>
+                    <select asp-for="State" id="Getsub" class="form-control" asp-items="Html.GetEnumSelectList<State>()">
+                        <option value="">اختر</option>
+                    </select>
+
+                    <Label>قيمة الصيانة</Label>
+                    <input asp-for="Cost" class="form form-control" />
+
+                    <Label>الدفع</Label>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input asp-for="IsPaid" value="false" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked style="height:unset">
+                            <label class="form-check-label" for="flexRadioDefault1" style="margin-right:20px">
+                                غير مسدد
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="IsPaid" value="true" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" style="height:initial">
+                            <label class="form-check-label" for="flexRadioDefault2" style="margin-right:20px">
+                                مسدد
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <Label>ملاحضات</Label>
+                    <textarea asp-for="Note" class="form-control"></textarea>
+
+                    <input id="save" type="submit" class="btn btn-success form-control mt-2" value="اضافة البلاغ">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </form>
+</div>

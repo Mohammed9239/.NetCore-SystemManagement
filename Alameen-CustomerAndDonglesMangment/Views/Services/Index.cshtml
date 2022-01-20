@@ -1,0 +1,243 @@
+﻿@model IEnumerable<Alameen_CustomerAndDonglesMangment.Models.Tasks>
+
+@{
+    ViewData["Title"] = "خدمة العملاء";
+    int count = 0;
+}
+
+<style>
+    .alert{
+        font-size:10px;
+        text-align:center
+    }
+</style>
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / خدمة العملاء</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- table section -->
+    <div class="col-md-12">
+        <div class="white_shd full margin_bottom_30">
+            <div class="full inbox_inner_section">
+                <div class="mail-option">
+                    <div class="btn-group">
+                        <a style="background-color: #1ed085;" asp-action="Create" class="btn text-white mini tooltips">
+                            اضافة بلاغ
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a style="border:1px solid #1ed085; color: #1ed085;" asp-controller="Competents" asp-action="Index" class="btn mini tooltips">
+                            المختصين
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a style="border:1px solid #1ed085; color: #1ed085;" asp-controller="MaintenanceTypes" asp-action="Index" class="btn mini tooltips">
+                            انواع الصيانة
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="full padding_infor_info">
+                            <div class="mail-box">
+                                <aside class="lg-side">
+                                    <div class="inbox-head">
+                                        <h3>البلاغات (@Model.ToList().Count)</h3>
+                                        <form asp-action="Index" class="position search_inbox" style="width: 100%;color: #000;">
+
+                                            <div class="row">
+
+                                                <div class="col-md-2">
+                                                    <label for="" class="filtter">فرز بحسب : </label>
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    <span>التنفيذ</span>
+                                                    <div class="input-append">
+                                                        <select name="StateId" id="Getsub" class="form-control cat">
+                                                            <option value="">الكل</option>
+                                                            @{
+                                                                List<string> select = new List<string>
+                                                                {
+                                                                    "",
+                                                                    "مكتمل",
+                                                                    "مكتمل جزئي",
+                                                                    "غير مكتمل",
+                                                                    "محظور",
+                                                                };
+
+                                                                for (int i = 1; i < select.Count; i++)
+                                                                {
+                                                                    if (i == ViewBag.StateId)
+                                                                    {
+                                                                        <option selected value="@i">@select[i]</option>
+                                                                    }
+
+                                                                    else
+                                                                    {
+                                                                        <option value="@i">@select[i]</option>
+                                                                    }
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    <span class="mr">الدفع</span>
+                                                    <div class="input-append">
+                                                        <select name="IsPaid" id="Getsub" class="form-control cat">
+                                                            <option value="">الكل</option>
+                                                            @{
+                                                                List<string> select1 = new List<string>
+                                                                {
+                                                                    "",
+                                                                    "مسدد",
+                                                                    "غير مسدد",
+                                                                };
+
+                                                                for (int i = 1; i < select1.Count; i++)
+                                                                {
+                                                                    if (i == ViewBag.IsPaid)
+                                                                    {
+                                                                        <option selected value="@i">@select1[i]</option>
+                                                                    }
+
+                                                                    else
+                                                                    {
+                                                                        <option value="@i">@select1[i]</option>
+                                                                    }
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row mt-4">
+
+                                                <div class="col-md-2">
+                                                </div>
+
+
+                                                <div class="col-md-10">
+                                                    <span>بحث</span>
+                                                    <div class="input-append">
+                                                        <input type="text" name="Word" class="sr-input" value="@ViewBag?.Word" placeholder="بحث...">
+                                                        <button class="btn sr-btn" type="submit"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                    <div class="inbox-body">
+
+                                        <div class="table_section">
+                                            <div class="table-responsive-sm">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>البلاغ</th>
+                                                            <th>اسم المحل</th>
+                                                            <th>العنوان</th>
+                                                            <th>المشكلة</th>
+                                                            <th>المختص</th>
+                                                            <th>الحاله</th>
+                                                            <th>الدفع</th>
+                                                            <th>ملاحظات</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr onclick="" style="cursor: pointer;">
+                                                                <td>@(++count)</td>
+                                                                <td>
+                                                                    <a asp-action="Details" asp-route-id="@item.Id">
+                                                                        @item?.NameOfCustomer
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a asp-action="Details" asp-route-id="@item.Id">
+                                                                        @item?.Customer.Name
+                                                                    </a>
+                                                                </td>
+                                                                <td>@item?.Customer?.State?.Name - @item.Customer?.City?.Name - @item.Customer?.Address</td>
+                                                                <td>@item?.Problem</td>
+                                                                <td>@item?.User?.FullName</td>
+                                                                <td>
+                                                                    @switch (item.State)
+                                                                    {
+                                                                        case State.Complete:
+                                                                            <span class="alert alert-success">مكتمل</span>
+                                                                            break;
+                                                                        case State.PartiallyComplete:
+                                                                            <span class="alert alert-warning">مكتمل جزئي</span>
+                                                                            break;
+                                                                        case State.UnComplete:
+                                                                            <span class="alert alert-dark">غير مكتمل</span>
+                                                                            break;
+                                                                        case State.Block:
+                                                                            <span class="alert alert-danger">محطور</span>
+                                                                            break;
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    @{
+                                                                        switch (item.IsPaid)
+                                                                        {
+                                                                            case true:
+                                                                                <span class="alert alert-success">مسدد</span>
+                                                                                break;
+
+                                                                            case false:
+                                                                                <span class="alert alert-danger">غير مسدد</span>
+                                                                                break;
+
+                                                                        }
+                                                                    }
+                                                                </td>
+                                                                <td>@item?.Note</td>
+                                                                <td>
+                                                                    <div class="ed">
+                                                                        <a class="btn" asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل">
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </a>
+                                                                        <a class="btn" asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="" data-original-title="حذف">
+                                                                            <i class="fa fa-trash-o"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pagedlist" style="float: right;">
+
+                                    </div>
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- table section -->
+</div>

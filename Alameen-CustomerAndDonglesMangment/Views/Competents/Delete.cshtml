@@ -1,0 +1,45 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.User
+
+@{
+    ViewData["Title"] = "حذف المختص";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / حذف المختص </h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form asp-action="Delete" style="display:contents">
+        <input type="hidden" asp-for="Id" />
+        <div class="col-md-8 mx-auto d-grid" style="display: grid;">
+
+            <div class="white_shd add_pro margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+                    <Label>اسم المختص</Label>
+                    <input asp-for="FullName" class="form form-control" />
+
+                    <Label>الوظيفة</Label>
+                    <input asp-for="Jop" class="form form-control" />
+
+                    <Label>الهاتف</Label>
+                    <input asp-for="PhoneNumber" class="form form-control" />
+
+                    <Label>اسم المستخدم</Label>
+                    <input asp-for="UserName" class="form form-control" />
+
+
+                    <input id="save" type="submit" class="btn btn-danger form-control mt-2" value="حذف">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,96 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "تسجيل الدخول";
+    Layout = null;
+}
+
+<head>
+        <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+        <style>
+            .gradient-custom-2 {
+                /*background: #33c8c1;
+                background: -webkit-linear-gradient(#33c8c1 0%, #119bd2 100%);
+                background: -moz-linear-gradient(#33c8c1 0%, #119bd2 100%);
+                background: linear-gradient(#33c8c1 0%, #119bd2 100%);*/
+                background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%);
+            }
+
+            @@media (min-width: 768px) {
+                .gradient-form {
+                    height: 100vh !important;
+                }
+            }
+
+         @@media (min-width: 769px) {
+            .gradient-custom-2 {
+               border-top-right-radius: .3rem;
+               border-bottom-right-radius: .3rem;
+            }
+         }
+        </style>
+
+    </head>
+
+
+<body>
+
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <div class="card-body p-md-5 mx-md-4">
+
+                                    <div class="text-center">
+                                        <h4 class="mt-1 mb-5 pb-1">صفحة تسجيل الدخول</h4>
+                                    </div>
+
+                                    <form id="login-form" class="form text-right" method="post">
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example11">اسم المستخدم</label>
+                                            <input asp-for="Input.UserName" id="username" class="form-control" />
+                                            <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example22">كلمة المرور</label>
+                                            <input asp-for="Input.Password" id="password" class="form-control" />
+                                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="text-center pt-1 mb-5 pb-1">
+                                            <button class="btn text-white btn-block fa-lg gradient-custom-2 mb-3" type="submit">تسجيل الدخول</button>
+                                        </div>
+
+
+                                    </form>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 d-flex align-items-center justify-content-center gradient-custom-2">
+                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                    <img src="~/images/logo.png" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+

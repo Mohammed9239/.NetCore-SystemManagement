@@ -1,0 +1,56 @@
+﻿@model Alameen_CustomerAndDonglesMangment.Models.User
+
+@{
+    ViewData["Title"] = "اضافة مختص";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>لوحة التحكم / اضافة مختص</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form asp-action="Create" style="display:contents">
+
+        <div class="col-md-8 mx-auto d-grid" style="display: grid;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="white_shd add_pro margin_bottom_30" style="padding: 20px;">
+                <div class="margin_bottom_30">
+
+
+                    <Label>اسم المختص</Label>
+                    <input asp-for="FullName" class="form form-control" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+
+                    <Label>الوظيفة</Label>
+                    <input asp-for="Jop" class="form form-control" />
+                    <span asp-validation-for="Jop" class="text-danger"></span>
+
+                    <Label>الهاتف</Label>
+                    <input asp-for="PhoneNumber" class="form form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                    <Label>اسم المستخدم</Label>
+                    <input asp-for="UserName" class="form form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+
+                    <Label>كلمة المرور</Label>
+                    <input asp-for="PasswordHash" class="form form-control" />
+                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+
+
+                    <input id="save" type="submit" class="btn btn-success form-control mt-2" value="اضافة">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </form>
+</div>
